@@ -1,0 +1,136 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(node *)",
+      "Bash(brew *)",
+      "Bash(sw_vers*)",
+      "Bash(which *)",
+      "Bash(xcode-select *)",
+      "Bash(cd ~/Claude/* && *)",
+      "mcp__pencil"
+    ],
+    "defaultMode": "auto"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Applications/SuperIsland.app/Contents/Resources/BundledExtensions/agents-status/hooks/cc-event-hook.sh' Idle # cc-status-hook"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Applications/SuperIsland.app/Contents/Resources/BundledExtensions/agents-status/hooks/cc-event-hook.sh' Working # cc-status-hook"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Applications/SuperIsland.app/Contents/Resources/BundledExtensions/agents-status/hooks/cc-event-hook.sh' Working # cc-status-hook"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Applications/SuperIsland.app/Contents/Resources/BundledExtensions/agents-status/hooks/cc-event-hook.sh' Auto # cc-status-hook"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Applications/SuperIsland.app/Contents/Resources/BundledExtensions/agents-status/hooks/cc-event-hook.sh' ToolFail # cc-status-hook"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Applications/SuperIsland.app/Contents/Resources/BundledExtensions/agents-status/hooks/cc-event-hook.sh' Waiting # cc-status-hook"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Applications/SuperIsland.app/Contents/Resources/BundledExtensions/agents-status/hooks/cc-event-hook.sh' Idle # cc-status-hook"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Applications/SuperIsland.app/Contents/Resources/BundledExtensions/agents-status/hooks/cc-event-hook.sh' Ended # cc-status-hook"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://127.0.0.1:7823/hooks/permission",
+            "timeout": 600
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "figma@claude-plugins-official": true,
+    "interfaces@interfaces": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "10x": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/Aboudjem/10x.git"
+      }
+    },
+    "interfaces": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/jakubkrehel/skills.git"
+      }
+    }
+  },
+  "effortLevel": "medium",
+  "advisorModel": "opus",
+  "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true
+}

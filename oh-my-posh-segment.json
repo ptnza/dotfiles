@@ -1,0 +1,12 @@
+// Add to a "segments" array in your Oh My Posh theme (right-aligned block works best).
+// Shows 🧹 only when the last devclean was 30+ days ago. Otherwise it's invisible.
+{
+  "type": "command",
+  "style": "plain",
+  "foreground": "#E5C07B",
+  "template": "{{ .Output }} ",
+  "properties": {
+    "shell": "bash",
+    "command": "devclean --due"
+  }
+}
