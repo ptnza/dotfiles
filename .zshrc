@@ -68,3 +68,4 @@ if (( $+commands[oh-my-posh] )); then
   eval "$(oh-my-posh init zsh --config "$HOME/.poshtheme.json")"
 fi
 setopt interactive_comments
+export HOMEBREW_NO_ANALYTICS=1 HOMEBREW_NO_INSECURE_REDIRECT=1
