@@ -1,0 +1,4 @@
+#!/bin/bash
+# Blocks any push that would publish a secret. Enable with: git config core.hooksPath hooks
+command -v gitleaks >/dev/null || { echo "pre-push: gitleaks not installed, skipping scan"; exit 0; }
+gitleaks detect --source . --no-banner -q || { echo "pre-push: gitleaks found a secret. Push blocked."; exit 1; }

@@ -69,3 +69,4 @@ if (( $+commands[oh-my-posh] )); then
 fi
 setopt interactive_comments
 export HOMEBREW_NO_ANALYTICS=1 HOMEBREW_NO_INSECURE_REDIRECT=1
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

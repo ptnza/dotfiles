@@ -48,6 +48,10 @@ if git -C "$DOT" rev-parse --git-dir >/dev/null 2>&1; then
   if git -C "$DOT" diff --cached --quiet; then echo "  nothing changed"
   else
     git -C "$DOT" commit -qm "devclean sync $(date +%F)" && echo "  committed"
-    git -C "$DOT" remote get-url origin >/dev/null 2>&1 && git -C "$DOT" push -q && echo "  pushed" || echo "  (no remote yet, committed locally)"
+    if git -C "$DOT" remote get-url origin >/dev/null 2>&1; then
+      if command -v gitleaks >/dev/null && ! gitleaks detect --source "$DOT" --no-banner -q; then
+        echo "  ⚠ gitleaks flagged something, NOT pushed. See: gitleaks detect --source $DOT -v"
+      else git -C "$DOT" push -q && echo "  pushed"; fi
+    else echo "  (no remote yet, committed locally)"; fi
   fi
 else echo "  dotfiles is not a git repo"; fi
