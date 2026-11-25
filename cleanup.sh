@@ -38,3 +38,13 @@ echo "  settings.json / CLAUDE.md backed up to dotfiles/claude"
 
 say "Health"; brew doctor
 say "Disk after"; df -h ~ | tail -1
+
+say "Dotfiles sync"
+if git -C "$DOT" rev-parse --git-dir >/dev/null 2>&1; then
+  git -C "$DOT" add -A
+  if git -C "$DOT" diff --cached --quiet; then echo "  nothing changed"
+  else
+    git -C "$DOT" commit -qm "devclean sync $(date +%F)" && echo "  committed"
+    git -C "$DOT" remote get-url origin >/dev/null 2>&1 && git -C "$DOT" push -q && echo "  pushed" || echo "  (no remote yet, committed locally)"
+  fi
+else echo "  dotfiles is not a git repo"; fi

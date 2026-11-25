@@ -67,3 +67,4 @@ skillzip() { (cd ~/.agents/skills && zip -r ~/Desktop/"$1".zip "$1" -x "*.DS_Sto
 if (( $+commands[oh-my-posh] )); then
   eval "$(oh-my-posh init zsh --config "$HOME/.poshtheme.json")"
 fi
+setopt interactive_comments
