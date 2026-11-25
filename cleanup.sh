@@ -16,6 +16,7 @@ brew outdated --quiet | grep -qx dnscrypt-proxy && echo "  ⚠ dnscrypt-proxy ha
 brew autoremove
 brew cleanup --prune=all -s
 brew bundle dump --file="$DOT/Brewfile" --force && echo "  Brewfile written to $DOT/Brewfile (edit it, then 'brew bundle cleanup --file=$DOT/Brewfile --force' removes anything not listed)"
+grep -q '^brew "dnscrypt-proxy"' "$DOT/Brewfile" || printf '# Encrypted DNS (root service; installed by dnscrypt/setup.sh)\nbrew "dnscrypt-proxy"\n' >> "$DOT/Brewfile"   # dump cannot see root-owned installs
 
 say "npm"
 npm cache clean --force 2>/dev/null

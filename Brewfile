@@ -2,14 +2,14 @@
 brew "openssl@3"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Secure communications between a client and a DNS resolver
+brew "dnscrypt-proxy"
 # Modern, maintained replacement for ls
 brew "eza"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
-# Fast and simple Node.js version manager
-brew "fnm"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
@@ -36,8 +36,6 @@ brew "oh-my-posh"
 brew "pinentry-mac"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
-# Tensors and dynamic neural networks
-brew "pytorch"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Terminal multiplexer
