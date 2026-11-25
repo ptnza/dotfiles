@@ -26,6 +26,8 @@ brew "htop"
 brew "iperf3"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Mac App Store command-line interface
+brew "mas"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.15"
 # Port scanning utility for large networks
@@ -104,6 +106,12 @@ cask "spotify"
 cask "zed"
 # Video communication and virtual meeting platform
 cask "zoom"
+mas "ColorSlurp", id: 1287239339
+mas "Gestimer", id: 6447125648
+mas "iMovie", id: 408981434
+mas "Keynote", id: 361285480
+mas "Magnet", id: 441258766
+mas "Numbers", id: 409203825
 npm "@openai/codex"
 npm "fieldtheory"
 npm "portless"
