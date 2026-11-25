@@ -9,6 +9,8 @@ My Mac dev setup: Homebrew, Ghostty, Oh My Posh, encrypted DNS, and a monthly cl
 | `harden.sh` | macOS hardening checklist, trimmed from [drduh's guide](https://github.com/drduh/macos-security-and-privacy-guide). Report by default, `--apply` to fix |
 | `dnscrypt/` | Encrypted DNS via dnscrypt-proxy (`setup.sh`, `upgrade.sh`) |
 | `ghostty.conf`, `oh-my-posh-segment.json`, `zshrc-snippet.sh` | Terminal, prompt and shell bits |
+| `home/` | Mirror of app configs (Zed, git, Ghostty, Oh My Posh, opencode, neofetch), synced by `devclean`. Add paths to `CONFIGS` in `cleanup.sh` |
+| `restore.sh` | Copies `home/` back into `~` on a new Mac (`--force` to overwrite) |
 | `hooks/pre-push` | gitleaks scan before every push |
 
 ## Use

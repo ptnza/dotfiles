@@ -16,6 +16,8 @@ brew "fzf"
 brew "gh"
 # Distributed revision control system
 brew "git"
+# Audit git repos for secrets
+brew "gitleaks"
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
 # Improved top (interactive process viewer)

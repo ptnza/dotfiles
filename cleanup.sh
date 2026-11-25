@@ -42,6 +42,23 @@ echo "  settings.json / CLAUDE.md backed up to dotfiles/claude"
 say "Health"; brew doctor
 say "Disk after"; df -h ~ | tail -1
 
+say "App configs"
+# Mirrors each file (relative to $HOME) into $DOT/home/. Add a path here to track it.
+CONFIGS=(
+  ".config/zed/settings.json"
+  ".config/git/ignore"
+  ".config/ohmyposh.omp.json"
+  ".config/opencode/opencode.json"
+  ".config/neofetch/config.conf"
+  ".poshtheme.json"
+  ".gitconfig"
+  "Library/Application Support/com.mitchellh.ghostty/config"
+)
+for f in "${CONFIGS[@]}"; do
+  if [ -f "$HOME/$f" ]; then mkdir -p "$DOT/home/$(dirname "$f")" && cp "$HOME/$f" "$DOT/home/$f" && echo "  $f"
+  else echo "  (skipped, not found) $f"; fi
+done
+
 say "Dotfiles sync"
 if git -C "$DOT" rev-parse --git-dir >/dev/null 2>&1; then
   git -C "$DOT" add -A
@@ -49,7 +66,7 @@ if git -C "$DOT" rev-parse --git-dir >/dev/null 2>&1; then
   else
     git -C "$DOT" commit -qm "devclean sync $(date +%F)" && echo "  committed"
     if git -C "$DOT" remote get-url origin >/dev/null 2>&1; then
-      if command -v gitleaks >/dev/null && ! gitleaks detect --source "$DOT" --no-banner -q; then
+      if command -v gitleaks >/dev/null && ! gitleaks detect --source "$DOT" --no-banner -l error; then
         echo "  ⚠ gitleaks flagged something, NOT pushed. See: gitleaks detect --source $DOT -v"
       else git -C "$DOT" push -q && echo "  pushed"; fi
     else echo "  (no remote yet, committed locally)"; fi
