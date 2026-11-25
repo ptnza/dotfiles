@@ -59,10 +59,10 @@ for f in "${CONFIGS[@]}"; do
 done
 # Ghostty: macOS keeps it in Application Support, but ~/.config/ghostty/config also works. Stored as ghostty.conf.
 GHOSTTY=""
-for p in "$HOME/Library/Application Support/com.mitchellh.ghostty/config" "$HOME/.config/ghostty/config"; do
+for p in "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty/config" "$HOME/.config/ghostty/config.ghostty" "$HOME/.config/ghostty/config"; do
   [ -f "$p" ] && GHOSTTY="$p" && break
 done
-if [ -n "$GHOSTTY" ]; then cp "$GHOSTTY" "$DOT/ghostty.conf" && echo "  ghostty → ghostty.conf"; else echo "  (skipped, not found) ghostty config"; fi
+if [ -n "$GHOSTTY" ]; then cp "$GHOSTTY" "$DOT/ghostty.conf" && echo "  ghostty → ghostty.conf"; else echo "  (skipped, not found) ghostty config; run: ls ~/Library/Application\\ Support/com.mitchellh.ghostty ~/.config/ghostty"; fi
 
 say "Dotfiles sync"
 if git -C "$DOT" rev-parse --git-dir >/dev/null 2>&1; then
