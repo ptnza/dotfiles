@@ -9,8 +9,10 @@ say "Disk before"; df -h ~ | tail -1
 
 say "Homebrew"
 brew update >/dev/null
-brew services list | grep -i dnscrypt && echo "  ↑ dnscrypt still registered. Run: sudo brew services stop dnscrypt-proxy && brew uninstall dnscrypt-proxy"
-brew upgrade
+# dnscrypt-proxy runs as a root service; Homebrew cannot upgrade it in place, so skip it by name.
+UPG=$(brew outdated --quiet | grep -vx dnscrypt-proxy || true)
+[ -n "$UPG" ] && brew upgrade $UPG || echo "  nothing to upgrade"
+brew outdated --quiet | grep -qx dnscrypt-proxy && echo "  ⚠ dnscrypt-proxy has an update (skipped on purpose, root service). Run: bash $DOT/dnscrypt/upgrade.sh"
 brew autoremove
 brew cleanup --prune=all -s
 brew bundle dump --file="$DOT/Brewfile" --force && echo "  Brewfile written to $DOT/Brewfile (edit it, then 'brew bundle cleanup --file=$DOT/Brewfile --force' removes anything not listed)"
