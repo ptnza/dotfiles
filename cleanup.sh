@@ -52,12 +52,17 @@ CONFIGS=(
   ".config/neofetch/config.conf"
   ".poshtheme.json"
   ".gitconfig"
-  "Library/Application Support/com.mitchellh.ghostty/config"
 )
 for f in "${CONFIGS[@]}"; do
   if [ -f "$HOME/$f" ]; then mkdir -p "$DOT/home/$(dirname "$f")" && cp "$HOME/$f" "$DOT/home/$f" && echo "  $f"
   else echo "  (skipped, not found) $f"; fi
 done
+# Ghostty: macOS keeps it in Application Support, but ~/.config/ghostty/config also works. Stored as ghostty.conf.
+GHOSTTY=""
+for p in "$HOME/Library/Application Support/com.mitchellh.ghostty/config" "$HOME/.config/ghostty/config"; do
+  [ -f "$p" ] && GHOSTTY="$p" && break
+done
+if [ -n "$GHOSTTY" ]; then cp "$GHOSTTY" "$DOT/ghostty.conf" && echo "  ghostty → ghostty.conf"; else echo "  (skipped, not found) ghostty config"; fi
 
 say "Dotfiles sync"
 if git -C "$DOT" rev-parse --git-dir >/dev/null 2>&1; then

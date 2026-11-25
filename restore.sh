@@ -9,4 +9,9 @@ find . -type f ! -name .DS_Store | sed 's|^\./||' | while IFS= read -r f; do
   if [ -e "$HOME/$f" ] && [ "$FORCE" = 0 ]; then echo "  exists, skipped: $f"
   else mkdir -p "$HOME/$(dirname "$f")" && cp "$DOT/home/$f" "$HOME/$f" && echo "  restored: $f"; fi
 done
+if [ -f "$DOT/ghostty.conf" ]; then
+  G="$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+  if [ -e "$G" ] && [ "$FORCE" = 0 ]; then echo "  exists, skipped: ghostty config"
+  else mkdir -p "$(dirname "$G")" && cp "$DOT/ghostty.conf" "$G" && echo "  restored: ghostty config"; fi
+fi
 echo "Next: cp $DOT/.zshrc ~/.zshrc, brew bundle --file=$DOT/Brewfile, then exec zsh"
